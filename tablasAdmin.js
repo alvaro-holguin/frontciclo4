@@ -1,6 +1,5 @@
 
 // Muestra la infromacion existente en la base de datos
-
 const traerInfoAdmin = () => {
     $.ajax({
         url:"http://localhost:8080/api/user/all",
@@ -10,17 +9,21 @@ const traerInfoAdmin = () => {
             console.log(respuesta);
             crearTabla(respuesta);
             
-           let idAdmin = respuesta.length+1;
-           console.log(idAdmin)
+            guardarid.push(respuesta.id);
             
         }
     });
 }
+
+let guardarid = [] ;
+console.log(guardarid);
+
 // funcion para crear una tabla con la informacion existentes en la base de datos
 
 const crearTabla = (respuesta) => {
 
-    let myTable = "<table class='table table-bordered text-center' thead><tr><th>identification</th><th>name</th><th>address</th>"+
+    let myTable = "<table class='table table-bordered text-center'"+
+    "thead><tr><th>identification</th><th>name</th><th>address</th>"+
     "<th>cellPhone</th><th>email</th><th>password</th><th>zone</th><th>type</th>"+
     "<th colspan='3'>OPCIONES</th></tr></thead>";
     for(i=0;i<respuesta.length;i++){
@@ -33,19 +36,19 @@ const crearTabla = (respuesta) => {
         myTable+="<td>"+respuesta[i].password+"</td>";
         myTable+="<td>"+respuesta[i].zone+"</td>";
         myTable+="<td>"+respuesta[i].type+"</td>";
-        myTable+="<td> <button onclick=' actualizarAdmin("+respuesta[i].id+")'>Actualizar</button>";
-        myTable+="<td> <button class='botonborrar' onclick='borrarAdmin("+respuesta[i].id+")'>Borrar</button>";
+        myTable+="<td> <button onclick='actualizarAdmin("+respuesta[i].id+")'>Actualizar</button>";
+        myTable+="<td> <button  onclick='borrarAdmin("+respuesta[i].id+")'>Borrar</button>";
         myTable+="</tr>";
     }
     // muestra la tabla en el html
     myTable+="</table>";
     $("#tablaAdmin").html(myTable);
 }
-
+  
 // Funcion para Guardar la informacion ingresada en el formaulario
-const guardarInfoAdmin = (idAdmin) =>{
+const guardarInfoAdmin = () =>{
 
-    const id = idAdmin;
+    const id = guardarid.length+1;
     const identification = $("#identification").val();
     const name = $("#name").val();
     const address = $("#address").val();  
@@ -102,41 +105,51 @@ const guardarInfoAdmin = (idAdmin) =>{
     
     console.log(payload);
 }
+    let adminid=[]
+    
+const actualizarAdmin = (idactu) =>{
+    $("#modal-body");
+    $("#myModal").modal('show');
+    adminid.push(idactu);
+}
 
 // funcion para actualizar la inforemacion Existente 
-const actualizarAdmin = (idActualizar) =>{
-
+const actuModal = () =>{
+    
+    console.log(adminid);
     // variable para actualizar por id
-    const id = idActualizar;
-
-    const identification = $("#identification").val();
-    const name = $("#name").val();
-    const address = $("#address").val();  
-    const cellPhone = $("#cellPhone").val();
-    const email = $("#email").val();
-    const password = $("#password").val();
-    const zone = $("#zone").val();
-    const type = $("#type").val();
+   // const id = ;
+    const id = adminid[0];
+    const identificationM = $("#identificationM").val();
+    const nameM = $("#nameM").val();
+    const addressM = $("#addressM").val();  
+    const cellPhoneM = $("#cellPhoneM").val();
+    const emailM = $("#emailM").val();
+    const passwordM= $("#passwordM").val();
+    const zoneM = $("#zoneM").val();
+    const typeM = $("#typeM").val();
 
     // validar que no se ingresen campos vacios
-    if ( identification.length == 0 || name.length == 0 || address.length == 0 || cellPhone.length == 0 || 
+  /* if ( identification.length == 0 || name.length == 0 || address.length == 0 || cellPhone.length == 0 || 
         email.length == 0 || password.length == 0 || zone.length == 0 || type.length == 0){
             alert("no se pueden ingresar campos vacios");
             return;
-    }
+    }*/
 
     // creamos una variable donde los datos quedan almacenado para envairlo al put
     let payload = {
         id,
-        identification: identification,
-        name: name,
-        cellPhone: cellPhone,
-        email: email,
-        password: password,
-        address: address,
-        zone: zone,
-        type: type
+        identification: identificationM,
+        name: nameM,
+        cellPhone: cellPhoneM,
+        email: emailM,
+        password: passwordM,
+        address: addressM,
+        zone: zoneM,
+        type: typeM
     };
+
+    console.log(payload);
 
     $.ajax({
         type:'PUT',
@@ -151,15 +164,15 @@ const actualizarAdmin = (idActualizar) =>{
                 console.log(response);
             console.log("Se actualizo correctamente");
             alert("Se actualizo correctamente");
-            limpiarCampos();
+            limpiarModal();
             traerInfoAdmin();
+            $("#myModal").modal('hide');
     
         },
         
         error: function(jqXHR, textStatus, errorThrown) {
               window.location.reload()
             alert("No se actualizo correctamente");
-    
     
         }
     });
@@ -197,3 +210,13 @@ const limpiarCampos = () =>{
     $("#type").val("");
 }
 
+const limpiarModal = () =>{
+    $("#identificationM").val("");
+    $("#nameM").val("");
+    $("#addressM").val("");  
+    $("#cellPhoneM").val("");
+    $("#emailM").val("");
+    $("#passwordM").val("");
+    $("#zoneM").val("");
+    $("#typeM").val("");
+}
