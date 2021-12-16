@@ -2,7 +2,7 @@
 // Muestra la infromacion existente en la base de datos
 const traerInfoAdmin = () => {
     $.ajax({
-        url:"http://localhost:8080/api/user/all",
+        url:"http://129.151.113.197:8080/api/user/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -22,23 +22,37 @@ console.log(guardarid);
 
 const crearTabla = (respuesta) => {
 
-    let myTable = "<table class='table table-bordered text-center'"+
-    "thead><tr><th>identification</th><th>name</th><th>address</th>"+
-    "<th>cellPhone</th><th>email</th><th>password</th><th>zone</th><th>type</th>"+
-    "<th colspan='3'>OPCIONES</th></tr></thead>";
+    let myTable = `<table class='table table-bordered text-center'
+    thead>
+        <tr class="table-primary">
+            <th>identification</th>
+            <th>name</th>
+            <th>address</th>
+            <th>cellPhone</th>
+            <th>email</th>
+            <th>password</th>
+            <th>zone</th>
+            <th>type</th>
+            <th colspan='3'>Options</th>
+        </tr>
+    </thead>`;
+
+
+
     for(i=0;i<respuesta.length;i++){
-        myTable+="<tr>";
-        myTable+="<td>"+respuesta[i].identification+"</td>";
-        myTable+="<td>"+respuesta[i].name+"</td>";
-        myTable+="<td>"+respuesta[i].address+"</td>";
-        myTable+="<td>"+respuesta[i].cellPhone+"</td>";
-        myTable+="<td>"+respuesta[i].email+"</td>";
-        myTable+="<td>"+respuesta[i].password+"</td>";
-        myTable+="<td>"+respuesta[i].zone+"</td>";
-        myTable+="<td>"+respuesta[i].type+"</td>";
-        myTable+="<td> <button onclick='actualizarAdmin("+respuesta[i].id+")'>Actualizar</button>";
-        myTable+="<td> <button  onclick='borrarAdmin("+respuesta[i].id+")'>Borrar</button>";
-        myTable+="</tr>";
+        myTable+=`
+        <tr class="table-light">
+            <td>${respuesta[i].identification}</td>
+            <td>${respuesta[i].name}</td>
+            <td>${respuesta[i].address}</td>
+            <td>${respuesta[i].cellPhone}</td>
+            <td>${respuesta[i].email}</td>
+            <td>${respuesta[i].password}</td>
+            <td>${respuesta[i].zone}</td>
+            <td>${respuesta[i].type}</td>
+            <td> <button class='btn btn-primary' onclick='actualizarAdmin(${respuesta[i].id})'>Actualizar</button>
+            <td> <button  class='btn btn-danger' onclick='borrarAdmin(${respuesta[i].id})'>Borrar</button>
+        </tr>`;
     }
     // muestra la tabla en el html
     myTable+="</table>";
@@ -71,11 +85,12 @@ const guardarInfoAdmin = () =>{
     };
 
     // validar que no se ingresen campos vacios
-    //if ( identification.length == 0 || name.length == 0 || address.length == 0 || cellPhone.length == 0 || 
-      //  email.length == 0 || password.length == 0 || zone.length == 0 || type.length == 0){
-     //       alert("no se pueden ingresar campos vacios");
-      //      return;
-    //}
+    if (
+      identification.length == 0 || name.length == 0 || address.length == 0 || cellPhone.length == 0 ||
+      email.length == 0 || password.length == 0 || zone.length == 0 || type.length == 0) {
+      alert("no se pueden ingresar campos vacios");
+      return;
+    }
         
         $.ajax({
             type:'POST',
@@ -83,7 +98,7 @@ const guardarInfoAdmin = () =>{
             dataType: 'JSON',
             data: JSON.stringify(payload),
             
-            url:"http://localhost:8080/api/user/new",
+            url:"http://129.151.113.197:8080/api/user/new",
            
             
             success:function(response) {
@@ -105,6 +120,9 @@ const guardarInfoAdmin = () =>{
     
     console.log(payload);
 }
+
+
+
     let adminid=[]
     
 const actualizarAdmin = (idactu) =>{
@@ -118,7 +136,6 @@ const actuModal = () =>{
     
     console.log(adminid);
     // variable para actualizar por id
-   // const id = ;
     const id = adminid[0];
     const identificationM = $("#identificationM").val();
     const nameM = $("#nameM").val();
@@ -130,11 +147,11 @@ const actuModal = () =>{
     const typeM = $("#typeM").val();
 
     // validar que no se ingresen campos vacios
-  /* if ( identification.length == 0 || name.length == 0 || address.length == 0 || cellPhone.length == 0 || 
-        email.length == 0 || password.length == 0 || zone.length == 0 || type.length == 0){
+  if ( identificationM.length == 0 || nameM.length == 0 || addressM.length == 0 || cellPhoneM.length == 0 || 
+        emailM.length == 0 || passwordM.length == 0 || zoneM.length == 0 || typeM.length == 0){
             alert("no se pueden ingresar campos vacios");
             return;
-    }*/
+    }
 
     // creamos una variable donde los datos quedan almacenado para envairlo al put
     let payload = {
@@ -157,7 +174,7 @@ const actuModal = () =>{
         dataType: 'JSON',
         data: JSON.stringify(payload),
         
-        url:"http://localhost:8080/api/user/update",
+        url:"http://129.151.113.197:8080/api/user/update",
        
         
         success:function(response) {
@@ -186,7 +203,7 @@ const borrarAdmin = (idBorrar) => {
     }
 
     $.ajax({
-        url:"http://localhost:8080/api/user/"+idBorrar,
+        url:"http://129.151.113.197:8080/api/user/"+idBorrar,
         type:"DELETE",
         data:JSON.stringify(payload),
         contentType:"application/JSON",

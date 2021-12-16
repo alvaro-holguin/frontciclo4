@@ -1,4 +1,24 @@
-.alineacion{
-    margin-right: 500px;
+/*-------------------------creacion del menu-------------------------------------------*/
+*{
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+/*cambia el color del fondo de la barra de navegacion */
+nav{
+    background-color:burlywood;
+    color: cornsilk;
+}
+/*Cambia el tamño de la letra*/
+a{
+    font-size: 18px;
+    
 }
 
+/* modifica la separacion de la separacion del container de productos respecto al borde del container*/
+.container-fluid {
+   padding-left: 50px;
+   padding-right: 50px;
+  }
