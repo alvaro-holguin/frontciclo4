@@ -1,14 +1,28 @@
+// leer funcion cuando inicie la pagina
+$(document).ready(() => {
+    traerInfoProds();
+})
+
 const traerInfoProds = () => {
     $.ajax({
-        url:"http://129.151.113.197:8080/api/gadget/all",
+        url:"http://localhost:8080/api/gadget/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
             console.log(respuesta);
             TablaGadget(respuesta);
-            
+            almaIdGadget(respuesta);
         }
     });
+}
+
+let idSaveGad=[]
+
+let almaIdGadget = (respuesta) => {
+    for (let i = 0; i < respuesta.length; i++) {
+        idSaveGad =(respuesta[i].id) + 1
+      }
+    console.log(idSaveGad)
 }
 
 // crear tabla para gadget
@@ -50,15 +64,12 @@ const TablaGadget = (respuesta) =>{
     $("#tablaGadget").html(TableProds);
 }
 
-// leer funcion cuando inicie la pagina
-$(document).ready(() => {
-    traerInfoProds();
-})
+
 
 // funcion para Guardar Productos
 const saveGadget = () =>{
 
-    const id = $("#codigo").val();
+    const id = idSaveGad;
     const brand = $("#brand").val();
     const category = $("#category").val();
     const name = $("#name").val();
@@ -69,7 +80,7 @@ const saveGadget = () =>{
     const photography= $("#photography").val();
 
     const payload = {
-        id: id,
+        id,
         brand:brand,
         category:category,
         name :name,
@@ -95,7 +106,7 @@ const saveGadget = () =>{
         dataType: 'JSON',
         data: JSON.stringify(payload),
         
-        url:"http://129.151.113.197:8080/api/gadget/new",
+        url:"http://localhost:8080/api/gadget/new",
        
         
         success:function(response) {
@@ -123,12 +134,12 @@ const saveGadget = () =>{
 const openModal = (idModal) =>{
     $("#modal-body");
     $("#ModalUpdate").modal('show');
-    idUpdate.push(idModal);
+    idUpdate=(idModal);
 }
 
 // funcion para actualizar los productos
 const updateGadget = () =>{ 
-    const id = idUpdate[0];
+    const id = idUpdate;
     const brand = $("#brandU").val();
     const category = $("#categoryU").val();
     const name = $("#nameU").val();
@@ -164,7 +175,7 @@ const updateGadget = () =>{
         dataType: 'JSON',
         data: JSON.stringify(payload),
         
-        url:"http://129.151.113.197:8080/api/gadget/update",
+        url:"http://localhost:8080/api/gadget/update",
        
         
         success:function(response) {
@@ -193,7 +204,7 @@ const deleteGadget = (idDelete) =>{
     }
 
     $.ajax({
-        url:"http://129.151.113.197:8080/api/gadget/"+idDelete,
+        url:"http://localhost:8080/api/gadget/"+idDelete,
         type:"DELETE",
         data:JSON.stringify(payload),
         contentType:"application/JSON",

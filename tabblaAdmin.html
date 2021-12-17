@@ -18,53 +18,51 @@
 
 <body>
   <script type="text/javascript" src="funciones_js/tablasAdmin.js"></script>
-  <script type="text/javascript"> window.onload = traerInfoAdmin();</script>
-
 
   <div class="container">
     <div class="row">
       <h1>Crear usuario</h1>
       <div class="col-md-4">
         <label for="identification" class="form-label">identification</label>
-        <input type="number" class="form-control" id="identification" placeholder="">
+        <input type="number" class="form-control" id="identification" placeholder="" required>
       </div>
       <div class="col-md-4 col-md-offset-4">
         <label for="name" class="form-label">name</label>
-        <input type="text" class="form-control" id="name" placeholder="">
+        <input type="text" class="form-control" id="name" placeholder="" required>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-4">
         <label for="address" class="form-label">address</label>
-        <input type="text" class="form-control" id="address" placeholder="">
+        <input type="text" class="form-control" id="address" placeholder="" required>
       </div>
       <div class="col-md-4 col-md-offset-4">
         <label for="cellPhone" class="form-label">cellPhone</label>
-        <input type="number" class="form-control" id="cellPhone" placeholder="">
+        <input type="number" class="form-control" id="cellPhone" placeholder="" required>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-4 col-md-offset-4 form-group">
         <label for="email" class="form-label">email</label>
-        <input type="email" class="form-control" id="email" placeholder="" required />
+        <input type="email" class="form-control" id="email" required>
       </div>
 
       <div class="col-md-4 col-md-offset-4">
         <label for="password" class="form-label">password</label>
-        <input type="password" class="form-control" id="password" placeholder="">
+        <input type="password" class="form-control" id="password" placeholder="" required>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4 col-md-offset-4">
         <label for="zone" class="form-label">zone</label>
-        <input type="text" class="form-control" id="zone" placeholder="">
+        <input type="text" class="form-control" id="zone" placeholder="" required>
       </div>
 
       <div class="col-md-4 col-md-offset-4">
         <label for="type" class="form-label">User Type</label>
-        <select name="type" class="form-select" id="type">
+        <select name="type" class="form-select" id="type" required>
           <option selected value="">Select User Type</option>
           <option value="cordinador Zona">ADM</option>
           <option value="asersor Comercial">ASM</option>
@@ -72,15 +70,17 @@
       </div>
     </div><br>
 
+
     <div>
-      <button class="btn btn-primary" onclick="guardarInfoAdmin()">Guardar Admins</button><br>
+      <button class="btn btn-primary" type="submit" onclick="guardarInfoAdmin()">Guardar Admins</button><br>
       <div><br>
+
         <h2>Informe de Usuarios</h2>
         <div id="tablaAdmin"></div>
       </div>
     </div>
+
   </div>
-  </form>
 
   <!------------------------MOdal------------------>
   <div class="modal" tabindex="-1" id="myModal">

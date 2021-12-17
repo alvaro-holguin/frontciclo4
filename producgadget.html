@@ -17,6 +17,7 @@
     <script type="text/javascript" src="funciones_js/tableProds.js"></script>
 
 <!--menu -->
+<!--
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <div class="collapse navbar-collapse">
@@ -43,39 +44,35 @@
         </div>
     </div>
 </nav>
-
+-->
 <!--formulario de productos-->
     <div class="container">
+    <form>
         <div class="row">
             <h1>Agregar Productos</h1>
-            <div class="col-md-4">
-                <label for="codigo" class="form-label">codigo</label>
-                <input type="number" class="form-control" id="codigo" placeholder="">
-            </div>
-            <div class="col-md-4 col-md-offset-4">
+            <div class="col-md-5">
                 <label for="brand" class="form-label">marca</label>
                 <input type="text" class="form-control" id="brand" placeholder="">
             </div>
-        </div>
-    
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5 col-md-offset-5">
                 <label for="category" class="form-label">categoria</label>
                 <input type="text" class="form-control" id="category" placeholder="">
             </div>
-            <div class="col-md-4 col-md-offset-4">
+        </div>
+    
+        <div class="row">
+            <div class="col-md-5">
                 <label for="nombre" class="form-label">nombre</label>
                 <input type="text" class="form-control" id="name" placeholder="">
+            </div>
+            <div class="col-md-5 col-md-offset-5">
+                <label for="descripcion" class="form-label">descripcion</label>
+                <input type="text" class="form-control" id="description" placeholder="">
             </div>
         </div>
     
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <label for="descripcion" class="form-label">descripcion</label>
-                <input type="text" class="form-control" id="description" placeholder="">
-            </div>
-    
-            <div class="col-md-4 col-md-offset-4">
+            <div class="col-md-5 col-md-offset-5">
                 <label for="disponibilidad" class="form-label">Disponibilidad</label>
                 <select name="disponibilidad" class="form-select" id="availability">
                     <option selected value="">Selecione la disponibilidad</option>
@@ -83,30 +80,30 @@
                     <option value="false">No</option>
                   </select>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
+    
+            <div class="col-md-5 col-md-offset-5">
                 <label for="precio" class="form-label">precio</label>
                 <input type="number" class="form-control" id="price" placeholder="">
             </div>
-    
-            <div class="col-md-4 col-md-offset-4">
+        </div>
+
+        <div class="row">
+            <div class="col-md-5 col-md-offset-5">
                 <label for="cantidad" class="form-label">cantidad</label>
                 <input type="number" class="form-control" id="quantity" placeholder="">
             </div>
-
-            <div class="col-md-8">
+    
+            <div class="col-md-5 col-md-offset-5">
                 <label for="fotografia" class="form-label">fotografia</label>
                 <input type="text" class="form-control" id="photography" placeholder="">
             </div>
         </div><br>
-        
+    
         <div>
             <button class="btn btn-primary" onclick="saveGadget()">Guardar Productos</button><br>
             
         </div>
-
+    </form>
         <!------------------------Modal------------------>
   <div class="modal" tabindex="-1" id="ModalUpdate">
     <div class="modal-dialog">
