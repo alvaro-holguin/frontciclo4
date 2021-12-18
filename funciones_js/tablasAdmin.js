@@ -80,6 +80,7 @@ const guardarInfoAdmin = () => {
   const password = $("#password").val();
   const zone = $("#zone").val();
   const type = $("#type").val();
+  re=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
 
   const payload = {
     id,
@@ -94,12 +95,16 @@ const guardarInfoAdmin = () => {
   };
 
   // validar que no se ingresen campos vacios
-  /*if (
+  if (
       identification.length == 0 || name.length == 0 || address.length == 0 || cellPhone.length == 0 ||
       email.length == 0 || password.length == 0 || zone.length == 0 || type.length == 0) {
       alert("no se pueden ingresar campos vacios");
       return;
-    }*/
+      //validar que el email se correcto
+    }else if(!re.exec(email)){
+      alert("Email No Valido")
+      return;
+    }
 
   $.ajax({
     url: "http://localhost:8080/api/user/emailexist/"+email,
